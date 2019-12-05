@@ -1,6 +1,7 @@
 package com.scs.web.blog.service;
 
 import com.scs.web.blog.domain.dto.UserDto;
+import com.scs.web.blog.entity.User;
 import com.scs.web.blog.util.Result;
 
 /**
@@ -19,6 +20,8 @@ public interface UserService {
      */
     Result signIn(UserDto userDto);
 
+
+    Result signUp(UserDto userDto);
     /**
      * 获取热门用户信息
      * @return
@@ -47,5 +50,12 @@ public interface UserService {
      * @return
      */
     Result selectByKeywords(String keywords);
-    Result update(long id,int iscare);
+
+
+    /**
+     * 更新用户信息
+     * @param user
+     * @return
+     */
+    Result update(User user);
 }

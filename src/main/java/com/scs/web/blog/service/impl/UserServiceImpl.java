@@ -15,6 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -28,6 +30,7 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao = DaoFactory.getUserDaoInstance();
     private ArticleDao articleDao = DaoFactory.getArticleDaoInstance();
     private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
 
     @Override
     public Result signIn(UserDto userDto) {
@@ -104,7 +107,7 @@ public class UserServiceImpl implements UserService {
             }
         }
 
-            return Result.failure(ResultCode.RESULT_CODE_DATA_NONE);
+        return Result.failure(ResultCode.RESULT_CODE_DATA_NONE);
 
     }
 
@@ -124,19 +127,41 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result update(long id, int iscare) {
-        int userList =0;
+    public Result update(User user) {
         try {
-            userList = userDao.update(id,iscare);
+            userDao.update(user);
         } catch (SQLException e) {
-            logger.error("根据id查询用户是否关注出现异常");
+            logger.error("更新用户出现异常");
+            return Result.failure(ResultCode.USER_UPDATE_FAILURE);
         }
-        if (userList != 0) {
-            return Result.success(userList);
-        }
-        else {
-            return Result.failure(ResultCode.RESULT_CODE_DATA_NONE);
-        }
-
+        return Result.success();
     }
+
+    @Override
+    public Result signUp(UserDto userDto) {
+        User user1 = null;
+        try {
+            user1 = userDao.findUserByMobile(userDto.getMobile());
+        } catch (SQLException e) {
+            logger.error("根据用户手机号查询用户出现异常");
+        }
+        if (user1 != null) {
+            return Result.failure(ResultCode.USER_HAS_EXISTED);
+        } else {
+            try {
+                userDto.setPassword(DigestUtils.md5Hex(userDto.getPassword()));
+                userDto.setBirthday(LocalDate.now());
+                userDto.setCreateTime(LocalDateTime.now());
+                userDto.setNickname("新用户");
+                userDto.setAvatar("1.jpg");
+                userDao.insert(userDto);
+            } catch (SQLException e) {
+                logger.error("新增用户出现异常");
+                return Result.failure(ResultCode.USER_SIGN_UP_FAILURE);
+            }
+            return Result.success();
+        }
+    }
+
+
 }

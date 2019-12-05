@@ -43,6 +43,7 @@ public class BeanHandler {
                 user.setArticles(rs.getInt("articles"));
                 user.setCreateTime(rs.getTimestamp("create_time").toLocalDateTime());
                 user.setStatus(rs.getShort("status"));
+
                 userList.add(user);
             }
         } catch (SQLException e) {
