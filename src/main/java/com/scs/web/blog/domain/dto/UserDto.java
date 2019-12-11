@@ -22,4 +22,6 @@ public class UserDto implements Serializable {
     private LocalDate birthday;
     private LocalDateTime createTime;
     private String code;
+
+
 }

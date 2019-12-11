@@ -210,11 +210,18 @@ public class UserController extends HttpServlet {
 
     private void update(HttpServletResponse resp,  long id, int iscare) throws ServletException, IOException {
 //        Gson gson = new GsonBuilder().create();
-//        Result rs = userService.update(id, iscare);
+//        ScriptContext req;
+//        BufferedReader reader = req.getReader();
+//        StringBuilder stringBuilder = new StringBuilder();
+//        String line = null;
+//        while ((line=reader.readLine())!=null){
+//            stringBuilder.append(line);
+//        }
+//        System.out.println(stringBuilder);
+//        User user = gson.fromJson(stringBuilder.toString(),User.class);
+//        Result result = userService.upDate(user);
 //        PrintWriter out = resp.getWriter();
-//        out.print(gson.toJson(rs));
+//        out.print(gson.toJson(result));
 //        out.close();
-
-
     }
 }

@@ -40,6 +40,8 @@ public class UserDaoImpl implements UserDao {
         DbUtil.close(connection, pst);
     }
 
+
+
     @Override
     public void update(User user) throws SQLException {
         Connection connection = DbUtil.getConnection();

@@ -127,15 +127,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result update(User user) {
-        try {
-            userDao.update(user);
-        } catch (SQLException e) {
-            logger.error("更新用户出现异常");
-            return Result.failure(ResultCode.USER_UPDATE_FAILURE);
-        }
-        return Result.success();
+    public Result update(UserDto userDto) {
+        return null;
     }
+
+//    @Override
+//    public Result update(User user) {
+//        try {
+//            userDao.update(user);
+//        } catch (SQLException e) {
+//            logger.error("更新用户出现异常");
+//            return Result.failure(ResultCode.USER_UPDATE_FAILURE);
+//        }
+//        return Result.success();
+//    }
 
     @Override
     public Result signUp(UserDto userDto) {

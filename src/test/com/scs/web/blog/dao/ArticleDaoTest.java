@@ -43,6 +43,7 @@ public class ArticleDaoTest {
         articleVoList.forEach(System.out::println);
     }
 
+// 新增文章
     @Test
     public void singleInsert() throws SQLException {
         Article article = new Article();
@@ -60,7 +61,7 @@ public class ArticleDaoTest {
 
     @Test
     public void batchDelete() throws SQLException {
-        int n = articleDao.batchDelete(106);
+        int n = articleDao.batchDelete(224);
         System.out.println(n);
     }
 
